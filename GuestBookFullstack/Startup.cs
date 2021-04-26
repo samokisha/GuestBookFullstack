@@ -5,7 +5,6 @@ using GuestBookFullstack.MapperProfiles;
 using GuestBookFullstack.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -27,14 +26,14 @@ namespace GuestBookFullstack
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(CommentProfile));
-                    
+
             services.AddDbContext<GuestBookContext>(
                 builder =>
                     builder.UseSqlServer(Configuration.GetConnectionString("GuestBook"))
             );
-            
+
             services.AddScoped<ICommentRepository, CommentRepository>();
-            
+
             services.AddControllersWithViews()
                 .AddJsonOptions(options =>
                 {
