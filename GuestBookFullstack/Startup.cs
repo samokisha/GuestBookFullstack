@@ -1,4 +1,6 @@
 using GuestBookFullstack.Data;
+using GuestBookFullstack.MapperProfiles;
+using GuestBookFullstack.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -22,10 +24,14 @@ namespace GuestBookFullstack
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(CommentProfile));
+                    
             services.AddDbContext<GuestBookContext>(
                 builder =>
                     builder.UseSqlServer(Configuration.GetConnectionString("GuestBook"))
             );
+            
+            services.AddScoped<ICommentRepository, CommentRepository>();
             
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
