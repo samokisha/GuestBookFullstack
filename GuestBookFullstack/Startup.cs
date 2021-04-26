@@ -84,7 +84,7 @@ namespace GuestBookFullstack
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
+                    spa.UseProxyToSpaDevelopmentServer(baseUri: "http://localhost:8080");
                 }
             });
         }
