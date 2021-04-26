@@ -1,4 +1,6 @@
+using System.Text.Json.Serialization;
 using GuestBookFullstack.Data;
+using GuestBookFullstack.JsonConverters;
 using GuestBookFullstack.MapperProfiles;
 using GuestBookFullstack.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -33,7 +35,13 @@ namespace GuestBookFullstack
             
             services.AddScoped<ICommentRepository, CommentRepository>();
             
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                    options.JsonSerializerOptions.Converters.Add(new JsonUnixDateTimeConverter());
+                    options.JsonSerializerOptions.IgnoreNullValues = true;
+                });
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
         }
