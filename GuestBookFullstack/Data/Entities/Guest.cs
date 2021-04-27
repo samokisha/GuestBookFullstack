@@ -7,7 +7,7 @@ namespace GuestBookFullstack.Data.Entities
     {
         public Guid Id { get; set; }
         
-        [Required]
+        [Required, StringLength(50, MinimumLength = 4)]
         public string Name { get; set; }
         public string CallbackContact { get; set; }
     }

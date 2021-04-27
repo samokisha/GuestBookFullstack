@@ -12,9 +12,11 @@ namespace GuestBookFullstack.Data.Entities
         
         [Required]
         public Guest Author { get; set; }
-        public CommentType CommentType { get; set; }
         
         [Required]
+        public CommentType CommentType { get; set; }
+        
+        [Required, StringLength(500, MinimumLength = 20)]
         public string Text { get; set; }
         
         [Required]
